@@ -1,0 +1,114 @@
+[
+    {
+        "id":101,
+        "nombre": "TETA DE LA INDIA",
+        "descripcion": "India Pale Ale",
+        "precio": 80.0,
+        "imagen": "tetaDeLaIndia.png", 
+        "cantidad": 0
+    },
+    {
+        "id":102,
+        "nombre": "CACHANILLA",
+        "descripcion": "Blonde Ale",
+        "precio": 80.0,
+        "imagen": "cachanilla.png", 
+        "cantidad": 0
+    },
+    {
+        "id":103,
+        "nombre": "CHERRY BOMB",
+        "descripcion": "Witbier con Frutas",
+        "precio": 80.0,
+        "imagen": "cherryBomb.png", 
+        "cantidad": 0 
+    },
+    {
+        "id":104,
+        "nombre": "CENTINELA",
+        "descripcion": "Amber Ale",
+        "precio": 80.0,
+        "imagen": "centinela.png", 
+        "cantidad": 0
+    },
+    {
+        "id":105,
+        "nombre": "PALACO",
+        "descripcion": "Coffe, Vainilla Porter",
+        "precio": 80.0,
+        "imagen": "palaco.png", 
+        "cantidad": 0
+    },
+    {
+        "id":201,
+        "nombre": "BURGUER DE POLLO Y PAPAS",
+        "descripcion": "Brioche con pollo frito bañado en salda spicy gochujang, coleslaw y pickles",
+        "precio": 170.0,
+        "maridaje": "Pale Ale / German Beers",
+        "imagen": "burguerPolloPapas.png", 
+        "cantidad": 0 
+    },
+    {
+        "id":202,
+        "nombre": "BURGUER DE RES Y PAPAS",
+        "descripcion": "Brioche con patty de Res, cheddar amarillo,  pickles, pepperoni y aderezo de la casa",
+        "precio": 170.0,
+        "maridaje": "American Pale Ale / India Pale Ale",
+        "imagen": "burguerResPapas.png", 
+        "cantidad": 0 
+    },
+    {
+        "id":203,
+        "nombre": "QUESADILLA DE ARRACHERA",
+        "descripcion": "Tortilla gorda, costra de queso, guacamole, salsa tatemada y arrachera de mesquite en el momento",
+        "precio": 80.0,
+        "maridaje": "Pilsner, APA y Belgian Beers",
+        "imagen": "quesadillaArrachera.png", 
+        "cantidad": 0 
+    },
+    {
+        "id":204,
+        "nombre": "CHICKEN TENDERS",
+        "descripcion": "Tiras de pollo empanizado bañados en salsa spicy gochujang",
+        "precio": 150.0,
+        "maridaje": "IPA, Hazy IPA, Duble IPA, y Unfiltered",
+        "imagen": "chickenTenders.png", 
+        "cantidad": 0 
+    },
+    {
+        "id":205,
+        "nombre": "FISH & CHIPS",
+        "descripcion": "Pescado blanco frito en Batter de IPA, papas crujientes y tartar de alcaparras",
+        "precio": 190.0,
+        "maridaje": "Amber Ale",
+        "imagen": "fishChips.png", 
+        "cantidad": 0 
+    },
+    {
+        "id":206,
+        "nombre": "ORDEN DE CHUN KUN",
+        "descripcion": "6 rollitos de vegetales fritos estilo chino con dipping de sriracha",
+        "precio": 170.0,
+        "maridaje": "Lager y Comerciales",
+        "imagen": "chunKun.png", 
+        "cantidad": 0 
+    },
+    {
+        "id":207,
+        "nombre": "GOLDRUSH PORKBELLY",
+        "descripcion": "Pancetta de Cochi horneado con crujiente chicharrón y dipping sauce de dijón",
+        "precio": 120.0,
+        "maridaje": "Souts, IPA's y Maltosas",
+        "imagen": "goldrushPorkbelly.png", 
+        "cantidad": 0 
+    },
+    {
+        "id":208,
+        "nombre": "FISH & ONIONS",
+        "descripcion": "Pescado blanco frito en batter de IPA (Teta de la India), aros de cebolla y tartar de alcaparras",
+        "precio": 190.0,
+        "maridaje": "Saison, Pale y Brown Ale",
+        "imagen": "fishOnions.png", 
+        "cantidad": 0 
+    }
+]
