@@ -1,10 +1,7 @@
 import React from 'react'
-// import logo from './logo.svg';
-// import Beer from './components/Beer';
 import MenuNavbar from './components/MenuNavbar';
 import Food from './components/Food';
 import Items from './components/Items';
-import Item from './components/Item';
 import Order from './components/Order';
 import Footer from './components/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,7 +9,6 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import { FaQrcode } from "react-icons/fa";
 
 import QRCode from "react-qr-code";
-// import QrReader from 'react-qr-reader'
 import QrReader from 'react-qr-scanner'
 
 
@@ -23,7 +19,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       menu: [],
-      tipPercentage: 15,
+      tipPercentage: 15.0,
       tipOther: 0,
       result: '',
       order: '',
@@ -71,7 +67,7 @@ class App extends React.Component {
         x.id === item.id ? { ...exist, cantidad: exist.cantidad + 1 } : x
       );
     this.setState({menu: menuTemp});
-    this.updateOder(menuTemp)
+    this.updateOder(menuTemp);
   }
 
   decrement (item) {
@@ -134,7 +130,9 @@ class App extends React.Component {
           });
         this.setState({menu: menuTemp});
         this.setState({showScanner: !this.state.showScanner});
+        this.updateOder(menuTemp)
       } catch (error) {
+        console.log(orderScanned);
         this.setState({result: 'Fallo'});
         return
       }
@@ -143,10 +141,12 @@ class App extends React.Component {
   }
 
   handleError(err){
-    let menuTemp = [...this.state.menu];
-    menuTemp.forEach(item => {item.cantidad = 0});
-    this.setState({menu: menuTemp});
-    this.setState({result: 'Fallo'});
+    if ( err != null ) {
+      let menuTemp = [...this.state.menu];
+      menuTemp.forEach(item => {item.cantidad = 0});
+      this.setState({menu: menuTemp});
+      this.setState({result: 'Fallo'});
+    }
   }
 
   handleShowScanner() {
@@ -158,28 +158,11 @@ class App extends React.Component {
                       onAdd={this.increment} onRemove={this.decrement} onDelete={this.delete}/>
     const comidas = <Food items={this.state.menu.filter(item => item.id >= 200 && item.id < 300)}
                       onAdd={this.increment} onRemove={this.decrement} onDelete={this.delete}/>
-    // const orden = <Items items={this.state.menu.filter(item => item.cantidad > 0 )}
-    //                   onAdd={this.increment} onRemove={this.decrement} onDelete={this.delete}/>
-
-
-    // const cervezas = 
-    //   this.state.menu
-    //     .filter(item => item.id >= 100 && item.id < 200 )
-    //     .map(item => 
-    //       <Col key={item.id+ce} xs={6} s={3} md={3} lg={2}><Beer key={item.id} item={item} onAdd={this.increment} onRemove={this.decrement} onDelete={this.delete} /></Col>
-    //   );
-    // const comidas = 
-    //   this.state.menu
-    //     .filter(item => item.id >= 200 && item.id < 300 )
-    //     .map(item => 
-    //       <Col key={item.id+'co'} xs={6} s={3} md={3} lg={2}><Beer key={item.id} item={item} onAdd={this.increment} onRemove={this.decrement} onDelete={this.delete} /></Col>
-    //   );
     const orden = this.state.menu.filter(item => item.cantidad > 0 ).map(item => 
         <Col key={item.id+'or'} xs={6} s={3} md={3} lg={2}>
           <Order key={item.id} item={item} onAdd={this.increment} onRemove={this.decrement} onDelete={this.delete}/>
         </Col>
       );
-
 
     const subTotal = this.state.menu.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
     return (
@@ -188,77 +171,90 @@ class App extends React.Component {
 
           <Container>
             <h1 id='cervezas'>CERVEZAS</h1>
-            <Row className='justify-content-md-center'> {cervezas} </Row>
+            <Row className='justify-content-xs-center'> {cervezas} </Row>
 
             <h1 id='comida'>COMIDA </h1>
-            <Row className='justify-content-md-center'> {comidas} </Row>
+            <Row className='justify-content-xs-center'> {comidas} </Row>
 
             <h1 id='tuOrden'>TU ORDEN</h1>
             
-            <Row className='justify-content-md-center'>
+            <Row className='justify-content-xs-center'>
               { orden.length > 0  && 
                 orden
               }
               { orden.length > 0  && 
-                <Col xs={12} s={4} md={4}>
+                <Col xs={12} md={'auto'} lg={'auto'}>
                   <Container className='orden'>
-                    <Row>
-                      <Col className='text-center'>
-                        <QRCode value={this.state.order} bgColor={'#f8bf32'} level={'L'}/>
+                    <Row className='justify-content-center pt-3 '>
+                      <Col className='text-center p-3 bg-light  shadow' xs={'auto'} s={'auto'} md={'auto'} lg={'auto'}>
+                        <QRCode value={this.state.order} />
                       </Col>
                     </Row>
-                    <Row>
-                      <Col className='ordenTitle'>Subtotal:</Col>
-                      <Col>{subTotal}</Col>
+                    <Row className='mt-3'>
+                      <Col className='ordenTitle'><h5>Subtotal:</h5></Col>
+                      <Col><h5>${subTotal}</h5></Col>
                     </Row>
                     <Row>
-                      <Col className='ordenTitle'>Propina:</Col>
+                      <Col className='ordenTitle'><h5>Propina:</h5></Col>
                       <Col></Col>
-                      {/* <Col>Propina {this.state.tipPercentage}%:</Col> */}
-                      {/* <Col>{(subTotal*(this.state.tipPercentage / 100)).toFixed(2)}</Col> */}
                     </Row>
                     <Row>
-                      <Col className='ordenTitle'><input type="radio" id="tip10" name="propina" value={15} onChange={this.onTipChanged} 
-                            checked={this.state.tipPercentage == 15} /> 15% 
+                      <Col className='ordenTitle'><h6>
+                            <input type="radio" id="tip10" name="propina" value={15.0} onChange={this.onTipChanged} 
+                            checked={this.state.tipPercentage == 15.0} /> 
+                            15%</h6>
                       </Col>
-                      <Col>{subTotal*.15}</Col>
-                    </Row>
-                    <Row>
-                      <Col className='ordenTitle'><input type="radio" id="tip10" name="propina" value={10} onChange={this.onTipChanged} 
-                            checked={this.state.tipPercentage == 10} /> 10% 
-                      </Col>
-                      <Col>{subTotal*.10}</Col>
-                    </Row>
-                    <Row>
-                      <Col className='ordenTitle'><input type="radio" id="tip10" name="propina" value={5} onChange={this.onTipChanged} 
-                            checked={this.state.tipPercentage == 5} /> 05% 
-                      </Col>
-                      <Col>{subTotal*.05}</Col>
+                      <Col><h6>${(subTotal*.15).toFixed(2)}</h6></Col>
                     </Row>
                     <Row>
                       <Col className='ordenTitle'>
+                        <h6>
+                          <input type="radio" id="tip10" name="propina" value={10} onChange={this.onTipChanged} 
+                          checked={this.state.tipPercentage == 10} />
+                          10%
+                        </h6> 
+                      </Col>
+                      <Col><h6>${(subTotal*.10).toFixed(2)}</h6></Col>
+                    </Row>
+                    <Row>
+                      <Col className='ordenTitle'>
+                        <h6>
+                          <input type="radio" id="tip10" name="propina" value={5} onChange={this.onTipChanged} 
+                            checked={this.state.tipPercentage == 5} /> 
+                          05%
+                        </h6>
+                      </Col>
+                      <Col><h6>${(subTotal*.05).toFixed(2)}</h6></Col>
+                    </Row>
+                    <Row>
+                      <Col className='ordenTitle'>
+                        <h6>
                           <input type="radio" id="tipOther" name="propina" value={this.state.tipOther} onChange={this.onTipChanged} 
                             checked={this.state.tipPercentage == this.state.tipOther} /> 
                           <input type="number" id="tipOtherNumber" name="propina" min={0} value={this.state.tipOther} onChange={this.onOtherTipChanged}/>%
+                        </h6>
                       </Col>
-                      <Col>{(subTotal*(this.state.tipOther/100)).toFixed(2)}</Col>
+                      <Col><h6>${(subTotal*(this.state.tipOther/100)).toFixed(2)}</h6></Col>
                     </Row>
-                    <Row>
-                      <Col className='ordenTitle'>Total: </Col>
-                      <Col>{(subTotal + (subTotal*(this.state.tipPercentage / 100))).toFixed(2)}</Col>
+                    <Row className='mt-2 font-weight-bold text-uppercase'>
+                      <Col className='ordenTitle'><h4>Total:</h4></Col>
+                      <Col><h4>${(subTotal + (subTotal*(this.state.tipPercentage / 100))).toFixed(2)}</h4></Col>
                     </Row>
                   </Container>
                 </Col>
               }
               { orden.length === 0  && 
-                <Col className=''>
+                <Col className='' xs={12} s={12} md={'auto'} lg={'auto'}>
                 
                 <h3>Aun no has ordenado nada</h3>
                 <h4>Explora el menu o escanea una Orden</h4>
 
-                <Button className='order btn-secondary px-5 mt-3 mb-3 d-flex justify-content-center' onClick={ () => this.handleShowScanner()}>
-                  <FaQrcode size={20}/>  ESCANEAR ORDEN
-                </Button>
+                <div className="d-grid">
+                  <Button className='order btn-secondary mt-3 mb-3 px-4'  onClick={ () => this.handleShowScanner()}>
+                    <FaQrcode size={20} className='mx-2'/>  
+                    <span className='mx-2'>ESCANEAR ORDEN</span>
+                  </Button>
+                </div>
 
                 <div>
                   

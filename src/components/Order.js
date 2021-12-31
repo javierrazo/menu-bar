@@ -27,7 +27,7 @@ class Order extends React.Component {
               <Button className='manageOrder btn-secondary' size="sm" onClick={ () => this.props.onRemove(this.props.item)}>
                 <BsDashLg size={10}/>
               </Button>
-              <span>{this.props.item.cantidad}</span>
+              <span className='mx-3'>{this.props.item.cantidad}</span>
               <Button className='manageOrder btn-secondary' size="sm" onClick={() => this.props.onAdd(this.props.item)}>
                 <BsPlusLg size={10}/>
               </Button>

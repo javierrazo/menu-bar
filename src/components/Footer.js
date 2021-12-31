@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Row, Col, Button, Nav } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { BsFacebook, BsInstagram, BsTwitter, BsHouseDoorFill, BsListUl, BsEnvelopeFill, BsFillTelephoneFill} from 'react-icons/bs';
 import { FaBeer, FaHamburger, FaMapMarkerAlt, FaWhatsapp } from "react-icons/fa";
 
@@ -53,7 +53,7 @@ export default class Footer extends Component {
 
                 <div className="text-center pt-2 pb-2 bg-secondary" >
                     <span>© 2020 Copyright: </span>
-                    <a className="text-white" href="#">Menu Bar</a>
+                    <a className="text-white" href="#!">Menu Bar</a>
                 </div>
             </footer>
         
