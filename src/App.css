@@ -11,8 +11,9 @@ h1 {
 
 .itemImg {
 	width: auto;
-	height: 7em;
+	height: 8em;
 	border-radius: 12px 12px 0px 0px;
+	object-fit: cover;
 }
 
 .ordenImg {

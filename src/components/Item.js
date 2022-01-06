@@ -15,6 +15,9 @@ class Item extends React.Component {
       return (
         <Card className="item">
           <Card.Img  className="itemImg" src={process.env.PUBLIC_URL+ 'images/' + this.props.item.imagen} alt="cerveza" />
+          {/* <div className="itemImg" style={{ 
+            backgroundImage: `url(${process.env.PUBLIC_URL+ 'images/' + this.props.item.imagen})` 
+          }}></div> */}
           <Card.Body>
 
             <Card.Title className="nombre"><b>{this.props.item.nombre}</b></Card.Title>
