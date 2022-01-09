@@ -14,7 +14,9 @@ class Order extends React.Component {
     render() {
       return (
         <Card className="item">
-          <Card.Img  className="itemImg" src={process.env.PUBLIC_URL+ 'images/' + this.props.item.imagen} alt="cerveza" />
+          <Card.Img  className="itemImg" 
+            src={process.env.PUBLIC_URL+ 'images/' + this.props.item.imagen} 
+            alt={process.env.PUBLIC_URL+ 'images/' + this.props.item.imagen} />
           <Card.Body>
 
             <Card.Title className="nombre"><b>{this.props.item.nombre}</b></Card.Title>
